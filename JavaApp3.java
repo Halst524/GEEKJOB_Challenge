@@ -12,8 +12,8 @@ package javaapplication2;
 public class JavaApp3 {
     public static void main(String[] arcs){
         
-        final int num = 10;
-        int num1 = 11;
+        final double num = 10;
+        double num1 = 11;
         System.out.println(num + num1);
         System.out.println(num - num1);
         System.out.println(num * num1);
