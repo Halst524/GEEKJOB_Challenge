@@ -16,9 +16,14 @@ public class JavaApplication2 {
      */
     public static void main(String[] args) {
         
-        String hello = "私の名前は西村 健と申します。";
-        System.out.println(hello);
-        // TODO code application logic here
+        final int num = 10;
+        int num1 = 11;
+        int result;
+        System.out.println(num + num1);
+        System.out.println(num - num1);
+        System.out.println(num * num1);
+        System.out.println(num / num1);
+        
     }
     
 }
