@@ -15,15 +15,8 @@ public class JavaApplication2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        final int num = 10;
-        int num1 = 11;
-        int result;
-        System.out.println(num + num1);
-        System.out.println(num - num1);
-        System.out.println(num * num1);
-        System.out.println(num / num1);
-        
+        String hello = "私は西村と申します。";
+        System.out.println(hello);
     }
     
 }
