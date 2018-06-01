@@ -1,6 +1,6 @@
 <%-- 
-    Document   : newjspApp7
-    Created on : 2018/06/01, 10:51:30
+    Document   : newjspApp7-2
+    Created on : 2018/06/01, 11:16:09
     Author     : guest1Day
 --%>
 <%@ page import="java.util.ArrayList" %>
@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <h1>Hello World!</h1>
         <%
             ArrayList<String> hi02 = new ArrayList<String>();
                     hi02.add("10");
@@ -21,6 +22,7 @@
                     hi02.add("-20");
                     hi02.add("118");
                     hi02.add("END");
+                    hi02.set(2,"33");
                     for(int i = 0; i < hi02.size();i++){
                         out.print(hi02.get(i));
                     }
