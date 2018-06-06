@@ -12,7 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.Random;
+import javax.servlet.RequestDispatcher;
+import org.camp.servlet.ResultData;
 
 /**
  *
@@ -37,7 +40,17 @@ public class FortuneTelling extends HttpServlet {
             String luckList[] = {"大吉", "中吉", "吉", "半吉", "末小吉", "凶", "小凶", "半凶", "末凶", "凶", "大凶"};
             Random rand = new Random();
             Integer index = rand.nextInt(luckList.length);
-            out.print(luckList[index]);
+            
+            ResultData data = new ResultData();
+            data.setD(new Date());
+            data.setLuck(luckList[index]);
+            request.setAttribute("DATA",data);
+            
+            String address = "/WEB-INF/jsp/FortuneTellingResult.jsp";
+            
+            RequestDispatcher rd = request.getRequestDispatcher(address);
+            rd.forward(request, response);
+            
         }
     }
 
