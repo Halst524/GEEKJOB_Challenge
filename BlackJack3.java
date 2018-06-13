@@ -25,14 +25,14 @@ public class BlackJack3 {
             dealer.open();
             dealer.checkSum();
         }
-        System.out.println((user.myCards) + "←内訳[プレイヤー]合計→" + (user.result));
-        System.out.println((dealer.myCards) + "←内訳[ディーラー]合計→" + (dealer.result));
+        System.out.println((user.myCards) + "←手札[プレイヤー]合計→" + (user.result));
+        System.out.println((dealer.myCards) + "←手札[ディーラー]合計→" + (dealer.result));
         if(user.result > 21 && dealer.result <= 21){
             System.out.println("プレイヤーがバストしました");
         } else if(dealer.result > 21 && user.result <= 21){
             System.out.println("ディーラーがバストしました");
         } else if(dealer.result > 21 && user.result > 21){
-            System.out.println("両者バーストしたので");
+            System.out.println("両者バストしたので");
         }
         if((user.result > dealer.result && user.result <= 21) || (dealer.result > 21 && user.result <= 21)){
             System.out.println("プレイヤーの勝利です");
