@@ -1,0 +1,87 @@
+　フレームワークの特徴
+枠組みをある程度固定することにより、コードの書き方を統一できることにより、どういうコードなのか分かりやすくなる。
+また、同時開発などでもルールが設定されているため、均質なコードの保証がされる。
+しかし、分かりやすいコードであるということは反面、読み取られやすいというデメリットともなっている。
+また、変動性のないものや、作り直したほうが早いプログラムなどではフレームワークを導入する意味合いは薄い。
+
+
+1.JSF
+Java EEのフレームワーク。
+様々なプラットフォームで動作する。。
+ユーザーインターフェイスを作ることができる。
+開発チームとデザインチームを分業できる特徴があるため、分業がしやすい。
+MVCモデルを採用している。
+
+　導入方法
+複数の必要な環境に複数の種類があるため、組み合わせは膨大で全環境に共通した１種類だけの環境構築というのは不可能である。
+例として下記の状況での導入方法
+OS	RedHat 7.0.1J
+Webサーバ	Apache 1.3.12 (RedHat に標準付属)
+サーブレット・コンテナ	Tomcat 3.2.1
+JDK	Java2SDK, Standard Edition 1.3.0_02 Linux版
+ApacheはRedHat付属のものを使用する。
+JDKとTomcatをインストールする。
+mod_jk.soをダウンロードし、/etc/httpd/libexec/以下にコピーする。（これはApacheとTomcatを繋ぐ処理です）
+Apacheの設定ファイル「httpd.conf」に「Include "$TOMCAT_HOME/conf/mod_jk.conf-auto" 」と入力する。
+Tomcatディレクトリへの具体的なパスを記述する。
+Tomcat、Apacheの順に起動する。
+
+
+2.Spring Framework
+広範囲のカバーができるフレームワーク。
+DI（依存性注入）によりプログラム間の依存性を排除し、コーディングやテストの簡素化ができる。
+依存性のあるプログラムは外部から取り入れるため、修正や変更が比較的簡単。
+フレームワークの大部分がインターフェイスとして提供されているので拡張性が高い。
+流れをテストする結合テストができるのでバグの混入を最低限にすることができる。
+AOPというプログラミング（本質的な処理と本質的ではない処理を分ける）を用いることができるため、コードを分かりやすくする事ができ、原因の特定がしやすくなる。
+また、本質的ではない処理はクラス外に書くので共通化できる処理であるため再利用できる。
+これにより全体量を減らし修正も最低限にできるため、効率的である。
+
+　導入方法
+JDKをインストールし、「Spring Tool Suite（通称:STS）」をインストールする。
+プロジェクト作成の際に「Spring Legacy Project」を選択する。
+テンプレートの一覧で「Simple Spring Web Maven」を選択する。
+その後Mavenをアップデートすることにより、Spring Framework等がプロジェクトのライブラリに登録される。
+
+
+3.Spark Framework
+Rubyのフレームワーク「Sinatora」の影響を受けているシンプルかつ軽量なフレームワーク。
+Java 8のラムダ式を採用しており、簡潔なコーディングを目指している。
+しかし、それゆえに機能性は低めであり、プロジェクトの特徴を見極める必要がある。
+
+　導入方法
+まずMavenでプロジェクトの雛型を作成し、「cd アーティファクトID」を実行する。
+pom.xmlを開き、以下の文を入力し、定義する。
+
+	<dependency>
+		<groupId>com.sparkjava</groupId>
+		<artifactId>spark-core</artifactId>
+		<version>2.5</version>
+	</dependency>
+
+また、以下の文をpom.xmlのurlタグとdependenciesタグの間に記述する。
+
+<properties>
+        <encoding>UTF-8</encoding>
+        <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <web.version>3.1</web.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+$ mvn 入力するプログラム/出力するプログラム とコマンドを実行する。
+使用するJavaファイルには「import static spark.Spark.*;」とSparkのインポートを行う。
