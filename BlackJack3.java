@@ -19,7 +19,7 @@ public class BlackJack3 {
         
         dealer.setCard(dealer.draw);
         dealer.open();
-        for(;dealer.checkSum();){
+        for(;user.result < 22 && dealer.checkSum();){
             dealer.hit(dealer.draw);
             dealer.setCard(dealer.draw);
             dealer.open();
