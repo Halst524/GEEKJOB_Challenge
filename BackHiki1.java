@@ -62,6 +62,8 @@ public class BackHiki1 extends HttpServlet {
                 prof.add(at.get(i));
             }
         }
+        prof.add("null");
+        prof.add("null");
         return prof;
         }
         
@@ -86,7 +88,7 @@ public class BackHiki1 extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             create();
-            search("A0001");
+            search("A001");
             for(int i = 1; i < prof.size();i++){
                 out.print(prof.get(i));
                 out.print("<br>");
