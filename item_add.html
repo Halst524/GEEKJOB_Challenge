@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>商品追加</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="./item_add.jsp" method="post">
+            <h2>商品ID</h2>
+            <input type="text" name="ID" required="required"><br><br>
+            <h2>商品名</h2>
+            <input type="text" name="name" required="required"><br><br>
+            <h2>仕入価格</h2>
+            <input type="number" name="price" required="required"><br><br>
+            <h2>売価</h2>
+            <input type="number" name="Sprice" required="required"><br><br>
+            <h2>在庫</h2>
+            <input type="number" name="stock" required="required"><br><br>
+            <select name="act">
+                <option value="追加">追加</option>
+                <option value="更新">更新</option>
+                <option value="消去">消去</option>
+            </select><br>
+            <input type="submit" value="実行">
+        </form>
+        <br>
+        <a href="./item.html">戻る</a>
+    </body>
+</html>
