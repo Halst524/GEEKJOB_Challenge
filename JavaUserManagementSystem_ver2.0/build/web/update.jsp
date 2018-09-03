@@ -23,16 +23,13 @@
         <br><br>
         <% String day = udd.getBirthday().toString();
         String[] days =  day.split("-");
-//        days[1] = days[1].replaceFirst("^0+", "");
-//        days[2] = days[2].replaceFirst("^0+", "");
         int[] dayn = new int[days.length];
         for (int i = 0; i < days.length; i++) {
-           dayn[i] = Integer.parseInt(days[i]); // throws NumberFormatException
+           dayn[i] = Integer.parseInt(days[i]);
         }
         %>
         生年月日:
         <select name="year">
-            <option value="">年</option>
             <%
                 for(int i=1950; i<=2010; i++){
                     if(dayn[0] == i){
@@ -43,7 +40,6 @@
             } %>
         </select>年
         <select name="month">
-            <option value="">月</option>
             <% for(int i = 1; i<=12; i++){ 
                 if(dayn[1] == i){
                     out.println("<option value=\""+i+"\" selected=\"selected\">"+i+"</option>");
@@ -53,7 +49,6 @@
             } %>
         </select>月
         <select name="day">
-            <option value="">日</option>
             <% for(int i = 1; i<=31; i++){
                 if(dayn[2] == i){
                     out.println("<option value=\""+i+"\" selected=\"selected\">"+i+"</option>");

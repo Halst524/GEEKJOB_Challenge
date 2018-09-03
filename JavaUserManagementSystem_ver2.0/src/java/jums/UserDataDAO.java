@@ -63,50 +63,50 @@ public class UserDataDAO {
         PreparedStatement st = null;
         try{
             con = DBManager.getConnection();
-            boolean a = false;
-            boolean b = false;
-            boolean c = false;
+            boolean namFlg = false;
+            boolean bdFlg = false;
+            boolean tpFlg = false;
             
             String sql = "SELECT * FROM user_t";
             boolean flag = false;
             if (!ud.getName().equals("")) {
                 sql += " WHERE name like ?";
                 flag = true;
-                a = true;// a…名前検索がある証明
+                namFlg = true;// a…名前検索がある証明
             }
             if (ud.getBirthday()!=null) {
                 if(!flag){
                     sql += " WHERE birthday like ?";
                     flag = true;
-                    b = true;
-                }else if(a){
+                    bdFlg = true;
+                }else if(namFlg){
                     sql += " AND birthday like ?";
-                    b = true;// b…生年検索がある証明
+                    bdFlg = true;// b…生年検索がある証明
                 }
             }
             if (ud.getType()!=0) {
                 if(!flag){
                     sql += " WHERE type = ?";
-                    c = true;
-                }else if(a || b){
+                    tpFlg = true;
+                }else if(namFlg || bdFlg){
                     sql += " AND type = ?";
-                    c = true;// c…職種検索がある証明
+                    tpFlg = true;// c…職種検索がある証明
                 }
             }
             st =  con.prepareStatement(sql);
-            if(a){
+            if(namFlg){
                 st.setString(1, "%"+ud.getName()+"%");
             }
-            if(a && b){ //ab共に真
+            if(namFlg && bdFlg){ //ab共に真
                 st.setString(2, "%"+ new SimpleDateFormat("yyyy").format(ud.getBirthday())+"%");
-            } else if(b){ //bが真の場合
+            } else if(bdFlg){ //bが真の場合
                 st.setString(1, "%"+ new SimpleDateFormat("yyyy").format(ud.getBirthday())+"%");
             }
-            if(a && b && c){
+            if(namFlg && bdFlg && tpFlg){
                 st.setInt(3, ud.getType());
-            } else if((a || b) && c){
+            } else if((namFlg || bdFlg) && tpFlg){
                 st.setInt(2, ud.getType());
-            } else if(c){
+            } else if(tpFlg){
                 st.setInt(1, ud.getType());
             }
             

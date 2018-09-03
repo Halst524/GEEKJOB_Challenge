@@ -10,7 +10,7 @@
     <h1>削除確認</h1>
     削除しました。<br>
         <form action="SearchResult" method="POST">
-            <input type="hidden" name="delete" value="yes">
+            <input type="hidden" name="delete" value="ban">
             <input type="submit" value="検索結果に戻る">
         </form>
     </body>

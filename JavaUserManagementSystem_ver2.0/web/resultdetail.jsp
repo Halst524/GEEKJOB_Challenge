@@ -16,7 +16,7 @@
         <table border="2">
             <tr><td>名前</td><td><%= udd.getName()%></td></tr>
             <tr><td>生年月日</td><td><%= udd.getBirthday()%></td></tr>
-            <tr><td>種別</td><td><%= udd.getType()%></td></tr>
+            <tr><td>種別</td><td><%= jh.exTypenum(udd.getType())%></td></tr>
             <tr><td>電話番号</td><td><%= udd.getTell()%></td></tr>
             <tr><td>自己紹介</td><td><%= udd.getComment()%></td></tr>
             <tr><td>登録日時</td><td><%= udd.getNewDate()%></td></tr>

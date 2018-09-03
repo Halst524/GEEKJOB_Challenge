@@ -1,8 +1,7 @@
 package jums;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Date;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,11 +38,6 @@ public class UpdateResult extends HttpServlet {
             String tell = request.getParameter("tell");
             String comment = request.getParameter("comment");
             
-//            String accesschk = request.getParameter("ac");
-//            if(accesschk ==null || (Integer)session.getAttribute("ac")!=Integer.parseInt(accesschk)){
-//                throw new Exception("不正なアクセスです");
-//            }
-            
             UserDataBeans udb = new UserDataBeans();
             udb.setUserID(id);
             udb.setName(name);
@@ -54,13 +48,18 @@ public class UpdateResult extends HttpServlet {
             udb.setTell(tell);
             udb.setComment(comment);
             
+            ArrayList chkList = udb.chkproperties();
+            
             UserDataDTO updateData = new UserDataDTO();
             udb.UD2DTOMapping(updateData);
             
+            if(chkList.size() == 0){
             UserDataDAO .getInstance().update(updateData);
-            
+            } else {
+                int nullcounter = chkList.size();
+                request.setAttribute("nc", nullcounter);
+            }
             request.setAttribute("udb", udb);
-            
             request.getRequestDispatcher("/updateresult.jsp").forward(request, response);  
         }catch(Exception e){
             //何らかの理由で失敗したらエラーページにエラー文を渡して表示。想定は不正なアクセスとDBエラー

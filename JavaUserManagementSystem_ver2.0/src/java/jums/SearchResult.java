@@ -32,15 +32,24 @@ public class SearchResult extends HttpServlet {
             request.setCharacterEncoding("UTF-8");//リクエストパラメータの文字コードをUTF-8に変更
             HttpSession hs = request.getSession();
             String str = request.getParameter("previous");
-            String str2 = "ban";
+            String chk = "ban";
             String del = request.getParameter("delete");
-            if(!Objects.equals(str2,str)){//strが"ban"ではないという条件式(nullの可能性があるstrは後ろに配置したほうがよい)
+            if(Objects.equals(chk,str) ||Objects.equals(chk,del)){//str、delが"ban"という条件式(nullの可能性があるstr、delは後ろに配置したほうがよい)
+                UserDataBeans udb = (UserDataBeans)hs.getAttribute("condition");
+                
+                //DTOオブジェクトにマッピング。DB専用のパラメータに変換
+                UserDataDTO searchData = new UserDataDTO();
+                udb.UD2DTOMapping(searchData);
+                hs.setAttribute("condition", udb);
+                
+                ArrayList resultList = UserDataDAO .getInstance().search(searchData);
+                hs.setAttribute("resultList", resultList);
+            } else {
+                //strが"ban"ではないという条件式(nullの可能性があるstrは後ろに配置したほうがよい)
                 //フォームからの入力を取得して、JavaBeansに格納
                 int sType = 0;
                 if(request.getParameter("type") != null){
                     sType = Integer.parseInt(request.getParameter("type"));
-                } else {
-                    sType = 0;
                 }
                 UserDataBeans udb = new UserDataBeans();
                 
@@ -52,19 +61,16 @@ public class SearchResult extends HttpServlet {
                     udb.setYear(request.getParameter("year"));
                 }
                 udb.setType(sType);
-                
                 //DTOオブジェクトにマッピング。DB専用のパラメータに変換
                 UserDataDTO searchData = new UserDataDTO();
                 udb.UD2DTOMapping(searchData);
-                if(del != null){
-                    searchData = (UserDataDTO) hs.getAttribute("sData");
-                } else{
-                    hs.setAttribute("sData", searchData);
-                }
-            
+                hs.setAttribute("condition", udb);
+
                 ArrayList resultList = UserDataDAO .getInstance().search(searchData);
                 hs.setAttribute("resultList", resultList);
+
             }
+            
             request.getRequestDispatcher("/searchresult.jsp").forward(request, response);  
         }catch(Exception e){
             //何らかの理由で失敗したらエラーページにエラー文を渡して表示。想定は不正なアクセスとDBエラー
